@@ -11,20 +11,42 @@ use App\Controller\QuestionController;
 $authController = new AuthController($pdo);
 $questionController = new QuestionController($pdo);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['email']) && isset($_POST['password'])) {
-        if (isset($_POST['name'])) {
+// Получение пути запроса
+$request = $_SERVER['REQUEST_URI'];
+
+// Маршрутизация
+switch ($request) {
+    case '/login':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $authController->login($_POST['email'], $_POST['password']);
+        } else {
+            require '../src/View/auth.php';
+        }
+        break;
+
+    case '/register':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $authController->register($_POST['name'], $_POST['email'], $_POST['password']);
         } else {
-            $authController->login($_POST['email'], $_POST['password']);
+            require '../src/View/auth.php';
         }
-    } elseif (isset($_POST['question_fr']) && isset($_POST['question_ru']) && isset($_POST['answer_fr']) && isset($_POST['answer_ru']) && isset($_POST['difficulty'])) {
-        $questionController->addQuestion($_POST['question_fr'], $_POST['question_ru'], $_POST['answer_fr'], $_POST['answer_ru'], $_POST['difficulty']);
-    }
-} else {
-    if (isset($_GET['action']) && $_GET['action'] == 'questions') {
+        break;
+
+    case '/add-question':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $questionController->addQuestion($_POST['question_fr'], $_POST['question_ru'], $_POST['answer_fr'], $_POST['answer_ru'], $_POST['difficulty']);
+        } else {
+            $questionController->showQuestions();
+        }
+        break;
+
+    case '/questions':
         $questionController->showQuestions();
-    } else {
+        break;
+
+    default:
         require '../src/View/auth.php';
-    }
+        break;
 }
+
+

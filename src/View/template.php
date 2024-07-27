@@ -10,7 +10,7 @@
     <div class="container">
         <header class="header">
             <h1>PHP Entretien Pro</h1>
-            <p>What used to take 30 min now takes 30 seconds.</p>
+            <p>PHP Entretien Pro : Prépare-toi à réussir tes entretiens !</p>
         </header>
         <section class="content">
             <?php echo $content; ?>
