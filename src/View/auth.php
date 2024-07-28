@@ -1,30 +1,30 @@
 <?php ob_start(); ?>
 
 <div class="card">
-    <h2>Login</h2>
+    <h2>Connexion</h2>
     <form method="POST" action="/PHP-Interview-Pro/public/login.php">
         <label>Email:</label>
         <input type="email" name="email" required>
         <br>
-        <label>Password:</label>
+        <label>Mot de passe :</label>
         <input type="password" name="password" required>
         <br>
-        <button type="submit">Login</button>
+        <button type="submit">Connexion</button>
     </form>
 </div>
 <div class="card">
-    <h2>Register</h2>
+    <h2>Inscription</h2>
     <form method="POST" action="/PHP-Interview-Pro/public/register.php">
-        <label>Name:</label>
+        <label>Nom :</label>
         <input type="text" name="name" required>
         <br>
-        <label>Email:</label>
+        <label>Email :</label>
         <input type="email" name="email" required>
         <br>
-        <label>Password:</label>
+        <label>Mot de passe :</label>
         <input type="password" name="password" required>
         <br>
-        <button type="submit">Register</button>
+        <button type="submit">Inscription</button>
     </form>
     <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$authController->register($_POST['name'], $_POST['email'], $_POST['password'])): ?>
         <p style="color: red;">Email already exists. Please use a different email.</p>
