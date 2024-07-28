@@ -2,7 +2,7 @@
 
 <div class="card">
     <h2>Add Question</h2>
-    <form method="POST" action="/add-question">
+    <form method="POST" action="/add-question.php">
         <label>Question (FR):</label>
         <input type="text" name="question_fr" required>
         <br>

@@ -13,7 +13,7 @@ class QuestionController {
 
     public function showQuestions($difficulty = null) {
         $questions = $this->questionModel->getAllQuestions($difficulty);
-        require '../src/View/questions.php';
+        require '../src/View/question-list.php';
     }
 
     public function addQuestion($questionFr, $questionRu, $answerFr, $answerRu, $difficulty) {
@@ -24,5 +24,3 @@ class QuestionController {
         }
     }
 }
-
-
