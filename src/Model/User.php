@@ -16,12 +16,18 @@ class User {
     }
 
     public function create($name, $email, $password) {
-        $stmt = $this->pdo->prepare('INSERT INTO users (name, email, password) VALUES (:name, :email, :password)');
-        return $stmt->execute([
-            'name' => $name,
-            'email' => $email,
-            'password' => password_hash($password, PASSWORD_BCRYPT)
-        ]);
+        try {
+            $stmt = $this->pdo->prepare('INSERT INTO users (name, email, password) VALUES (:name, :email, :password)');
+            return $stmt->execute([
+                'name' => $name,
+                'email' => $email,
+                'password' => password_hash($password, PASSWORD_BCRYPT)
+            ]);
+        } catch (\PDOException $e) {
+            if ($e->getCode() == 23000) { // Код ошибки для дублирующей записи
+                return false;
+            }
+            throw $e;
+        }
     }
 }
-
